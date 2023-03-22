@@ -2,6 +2,8 @@ const buttonRepo = document.getElementById('buttonRepo');
 buttonRepo.addEventListener("click",getRepo);
 
 async function getRepo() {
+    //call clear function so you can only fetch results once
+    clear();
     // fetch from github API 
     //change this link 
     const url = "https://api.github.com/search/repositories?q=stars:>100000";
@@ -26,4 +28,11 @@ async function getRepo() {
     });
 
     console.log(result);
+}
+
+//function so results are not added after every button click (only first)
+function clear() {
+    while(divResult.firstChild) {
+        divResult.removeChild(divResult.firstChild);
+    }
 }
